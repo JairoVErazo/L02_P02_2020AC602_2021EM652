@@ -1,3 +1,6 @@
+using L02_P02_2020AC602_2021EM652.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace L02_P02_2020AC602_2021EM652
 {
     public class Program
@@ -8,6 +11,8 @@ namespace L02_P02_2020AC602_2021EM652
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<LibreriaDbContext>(options => 
+            options.UseSqlServer("name=DefaultConnection"));
 
             var app = builder.Build();
 
