@@ -1,41 +1,59 @@
-﻿
-<div style="display: flex;">
-    <div style="flex: 1; margin-right: 20px;">
-        <h3 style="color:blue">Libros</h3>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span class="item-name">Libro</span>
-                <span class="price">$20</span>
-                <button class="btn btn-primary float-right" style="background-color:green">Botón</button>
-            </li>
-            <li class="list-group-item">
-                <span class="item-name">Libro</span>
-                <span class="price">$25</span>
-                <button class="btn btn-primary float-right" style="background-color:green">Botón</button>
-            </li>
-            <li class="list-group-item">
-                <span class="item-name">Libro</span>
-                <span class="price">$30</span>
-                <button class="btn btn-primary float-right" style="background-color:green">Botón</button>
-            </li>
-            <li class="list-group-item">
-                <span class="item-name">Libro</span>
-                <span class="price">$15</span>
-                <button class="btn btn-primary float-right" style="background-color:green">Botón</button>
-            </li>
-        </ul>
-    </div>
-    <div style="flex: 1;">
-        <ul>
-            <h3 style="color:blue">Total Libros</h3>
-            <li> 
-                <span class="item-name">Total(USD)</span>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 20%;"></div>
+﻿<container>
+    <div style="display: flex;">
+        <div style="flex: 1; margin-right: 20px; font-size: 20px;">
+            <h3 style="color: blue;">Libros</h3>
+            <hr style="border-top: 2px solid lightgray;">
+            <div class="book-item">
+                <div class="item-info" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <p>Libro</p>
+                        <p style="font-size:15px;">Autor</p>
+                    </div>
+                    <span class="price" style="margin: 0 15px;">$20</span>
+                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
                 </div>
-            </li>
-        </ul>
+            </div>
+            <hr style="border-top: 2px solid lightgray;">
+            <div class="book-item">
+                <div class="item-info" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <p>Libro</p>
+                        <p style="font-size:15px;">Autor</p>
+                    </div>
+                    <span class="price" style="margin: 0 15px;">$25</span>
+                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
+                </div>
+            </div>
+            <hr style="border-top: 2px solid lightgray;">
+            <div class="book-item">
+                <div class="item-info" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <p>Libro</p>
+                        <p style="font-size:15px;">Autor</p>
+                    </div>
+                    <span class="price" style="margin: 0 15px;">$30</span>
+                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
+                </div>
+            </div>
+            <hr style="border-top: 2px solid lightgray;">
+            <div class="book-item">
+                <div class="item-info" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <p>Libro</p>
+                        <p style="font-size:15px;">Autor</p>
+                    </div>
+                    <span class="price" style="margin: 0 15px;">$15</span>
+                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
+                </div>
+            </div>
+            <hr style="border-top: 2px solid lightgray;">
+        </div>
+        <div style="flex: 1;">
+            <h3 style="color: blue;">Total Libros</h3>
+            <h5 style="color: dimgray;">Total (USD)</h5>
+            <button class="btn btn-primary float-right" style="background-color:skyblue; color: black; border: 5px solid white; width: 500px;">Completar</button>
+        </div>
     </div>
-</div>
 
+</container>
 

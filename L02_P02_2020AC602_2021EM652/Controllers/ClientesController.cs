@@ -13,5 +13,10 @@ namespace L02_P02_2020AC602_2021EM652.Controllers
         {
             return View();
         }
+
+        public IActionResult Cierre()
+        {
+            return View();
+        }
     }
 }
