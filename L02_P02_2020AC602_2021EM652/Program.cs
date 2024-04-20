@@ -1,4 +1,5 @@
 using L02_P02_2020AC602_2021EM652.Models;
+using L02_P02_2020AC602_2021EM652.Servicios;
 using Microsoft.EntityFrameworkCore;
 
 namespace L02_P02_2020AC602_2021EM652
@@ -13,6 +14,7 @@ namespace L02_P02_2020AC602_2021EM652
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LibreriaDbContext>(options => 
             options.UseSqlServer("name=DefaultConnection"));
+            builder.Services.AddTransient<IRepositorioClientes, RepositorioClientes>();
 
             var app = builder.Build();
 
