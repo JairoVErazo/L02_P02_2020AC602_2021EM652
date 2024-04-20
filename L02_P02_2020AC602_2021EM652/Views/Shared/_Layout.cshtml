@@ -3,30 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - L02_P02_2020AC602_2021EM652</title>
+    <title>@ViewData["Title"] - Venta de Libros</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/L02_P02_2020AC602_2021EM652.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dulce_sabor_modulo_venta_en_linea.styles.css" asp-append-version="true" />
+
+
 </head>
-<body>
+<body style="font-size:25px">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">L02_P02_2020AC602_2021EM652</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3" style="background-color:black">
+            <div class="container d-flex flex-column align-items-center">
+                <a class="navbar-brand mb-2" asp-area="" asp-controller="Home" asp-action="Index"> <img src="/img/UNICAES Logo.png" width="130px" height="130px" alt="Logo" /></a>
+                <a class="navbar-brand" style="font-size:2rem; color:white" asp-area="" asp-controller="Home" asp-action="Index">Venta de Libros</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </nav>
     </header>
@@ -36,11 +29,16 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - L02_P02_2020AC602_2021EM652 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top text-muted" style="background-color:black">
+        <div class="container d-flex align-items-center justify-content-center mt-5">
+            <div class="row" style="color:white">
+                <p>20/04/2024 Liliana Aguilar</p>
+                <p>20/04/2024 Jairo Erazo</p>
+            </div>
         </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
