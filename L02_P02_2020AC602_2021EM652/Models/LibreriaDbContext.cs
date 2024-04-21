@@ -188,6 +188,11 @@ public partial class LibreriaDbContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CantidadLibros).HasColumnName("cantidad_libros");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("estado");
             entity.Property(e => e.IdCliente).HasColumnName("id_cliente");
             entity.Property(e => e.Total)
                 .HasColumnType("decimal(18, 2)")

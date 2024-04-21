@@ -1,53 +1,24 @@
-﻿<container>
+﻿@model IEnumerable<Libro>;
+
+<container>
     <div style="display: flex;">
         <div style="flex: 1; margin-right: 20px; font-size: 20px;">
             <h3 style="color: blue;">Libros</h3>
             <hr style="border-top: 2px solid lightgray;">
-            <div class="book-item">
-                <div class="item-info" style="display: flex; align-items: center;">
-                    <div style="flex: 1;">
-                        <p>Libro</p>
-                        <p style="font-size:15px;">Autor</p>
+            @foreach( var libro in Model)
+            {
+                <div class="book-item">
+                    <div class="item-info" style="display: flex; align-items: center;">
+                        <div style="flex: 1;">
+                            <p>@libro.Nombre </p>
+                            <p style="font-size:15px;">@libro.IdAutorNavigation.Autor</p>
+                        </div>
+                        <span class="price" style="margin: 0 15px;">@libro.Precio</span>
+                        <button asp-route-id="@libro.Id" asp-action="AgregarACarrito" class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
                     </div>
-                    <span class="price" style="margin: 0 15px;">$20</span>
-                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
                 </div>
-            </div>
-            <hr style="border-top: 2px solid lightgray;">
-            <div class="book-item">
-                <div class="item-info" style="display: flex; align-items: center;">
-                    <div style="flex: 1;">
-                        <p>Libro</p>
-                        <p style="font-size:15px;">Autor</p>
-                    </div>
-                    <span class="price" style="margin: 0 15px;">$25</span>
-                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
-                </div>
-            </div>
-            <hr style="border-top: 2px solid lightgray;">
-            <div class="book-item">
-                <div class="item-info" style="display: flex; align-items: center;">
-                    <div style="flex: 1;">
-                        <p>Libro</p>
-                        <p style="font-size:15px;">Autor</p>
-                    </div>
-                    <span class="price" style="margin: 0 15px;">$30</span>
-                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
-                </div>
-            </div>
-            <hr style="border-top: 2px solid lightgray;">
-            <div class="book-item">
-                <div class="item-info" style="display: flex; align-items: center;">
-                    <div style="flex: 1;">
-                        <p>Libro</p>
-                        <p style="font-size:15px;">Autor</p>
-                    </div>
-                    <span class="price" style="margin: 0 15px;">$15</span>
-                    <button class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
-                </div>
-            </div>
-            <hr style="border-top: 2px solid lightgray;">
-        </div>
+            }
+
         <div style="flex: 1;">
             <h3 style="color: blue;">Total Libros</h3>
             <h5 style="color: dimgray;">Total (USD)</h5>

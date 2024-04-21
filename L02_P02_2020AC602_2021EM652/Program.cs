@@ -15,6 +15,7 @@ namespace L02_P02_2020AC602_2021EM652
             builder.Services.AddDbContext<LibreriaDbContext>(options => 
             options.UseSqlServer("name=DefaultConnection"));
             builder.Services.AddTransient<IRepositorioClientes, RepositorioClientes>();
+            builder.Services.AddTransient<IRepositorioLibros, RepositorioLibros>();
 
             var app = builder.Build();
 
