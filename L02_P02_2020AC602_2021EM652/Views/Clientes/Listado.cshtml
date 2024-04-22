@@ -14,15 +14,18 @@
                             <p style="font-size:15px;">@libro.IdAutorNavigation.Autor</p>
                         </div>
                         <span class="price" style="margin: 0 15px;">@libro.Precio</span>
-                        <button asp-route-id="@libro.Id" asp-action="AgregarACarrito" class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
+                        <form method="post" asp-action="AgregarACarrito">
+                            <input type="hidden" name="libro" value="@libro.Id" />
+                            <button type="submit" class="btn btn-primary float-right" style="background-color: green; border: 1px solid white;">+Agregar</button>
+                        </form>
                     </div>
                 </div>
             }
 
         <div style="flex: 1;">
-            <h3 style="color: blue;">Total Libros</h3>
-            <h5 style="color: dimgray;">Total (USD)</h5>
-            <button class="btn btn-primary float-right" style="background-color:skyblue; color: black; border: 5px solid white; width: 500px;">Completar</button>
+            <h3 style="color: blue;">Libros @(ViewBag.listaSeleccionados?.libros ?? 0)</h3>
+            <h5 style="color: dimgray;">Total: @((ViewBag.listaSeleccionados?.total ?? 0)) USD</h5>
+                <button> <a asp-action="Cierre" class="btn btn-primary float-right" style="background-color:skyblue; color: black; border: 5px solid white; width: 500px;">Completar</a> </button>
         </div>
     </div>
 

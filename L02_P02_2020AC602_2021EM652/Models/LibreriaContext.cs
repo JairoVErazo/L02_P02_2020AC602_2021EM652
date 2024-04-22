@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace L02_P02_2020AC602_2021EM652.Models;
 
-public partial class LibreriaDbContext : DbContext
+public partial class LibreriaContext : DbContext
 {
-    public LibreriaDbContext()
+    public LibreriaContext()
     {
     }
 
-    public LibreriaDbContext(DbContextOptions<LibreriaDbContext> options)
+    public LibreriaContext(DbContextOptions<LibreriaContext> options)
         : base(options)
     {
     }
@@ -36,7 +36,7 @@ public partial class LibreriaDbContext : DbContext
     {
         modelBuilder.Entity<Autore>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__autores__3213E83F3EDB559D");
+            entity.HasKey(e => e.Id).HasName("PK__autores__3213E83F07523D76");
 
             entity.ToTable("autores");
 
@@ -51,7 +51,7 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<Categoria>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__categori__3213E83F69E7730A");
+            entity.HasKey(e => e.Id).HasName("PK__categori__3213E83FD795E666");
 
             entity.ToTable("categorias");
 
@@ -66,13 +66,11 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__clientes__3213E83F5973CA0B");
+            entity.HasKey(e => e.Id).HasName("PK__clientes__3213E83FDC401536");
 
             entity.ToTable("clientes");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(255)
                 .HasColumnName("apellido");
@@ -92,7 +90,7 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<ComentariosLibro>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__comentar__3213E83F0CF090CA");
+            entity.HasKey(e => e.Id).HasName("PK__comentar__3213E83F0EE7D60E");
 
             entity.ToTable("comentarios_libros");
 
@@ -118,7 +116,7 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<Libro>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__libros__3213E83F90BC01BC");
+            entity.HasKey(e => e.Id).HasName("PK__libros__3213E83FB1A24FE7");
 
             entity.ToTable("libros");
 
@@ -156,13 +154,11 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<PedidoDetalle>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__pedido_d__3213E83F9772F385");
+            entity.HasKey(e => e.Id).HasName("PK__pedido_d__3213E83F85A271F4");
 
             entity.ToTable("pedido_detalle");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
@@ -180,13 +176,11 @@ public partial class LibreriaDbContext : DbContext
 
         modelBuilder.Entity<PedidoEncabezado>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__pedido_e__3213E83F94410012");
+            entity.HasKey(e => e.Id).HasName("PK__pedido_e__3213E83FC7613E4F");
 
             entity.ToTable("pedido_encabezado");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CantidadLibros).HasColumnName("cantidad_libros");
             entity.Property(e => e.Estado)
                 .HasMaxLength(1)

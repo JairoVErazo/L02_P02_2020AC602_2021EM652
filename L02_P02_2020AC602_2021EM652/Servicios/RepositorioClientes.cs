@@ -1,20 +1,25 @@
 ﻿using L02_P02_2020AC602_2021EM652.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace L02_P02_2020AC602_2021EM652.Servicios
 {
 
     public interface IRepositorioClientes
     {
+        Task<PedidoEncabezado> ActualizarPedido(int cliente, int libros, decimal total);
         Task <int>AgregarLibroAlDetalle(int libro, int pedido);
         Task<int> CrearCliente(Cliente cliente);
+        Task<Cliente> ObtenerCliente(int idCliente);
+        Task<IEnumerable<PedidoDetalle>> ObtenerDetalleDeVenta(int idCliente);
         Task<int> ObtenerPedido(int cliente);
+        Task<int> UltimoCliente();
     }
     public class RepositorioClientes : IRepositorioClientes
     {
-        private readonly LibreriaDbContext _context;
+        private readonly LibreriaContext _context;
 
-        public RepositorioClientes(LibreriaDbContext contextDb)
+        public RepositorioClientes(LibreriaContext contextDb)
         {
             _context = contextDb;
         }
@@ -22,7 +27,7 @@ namespace L02_P02_2020AC602_2021EM652.Servicios
 
         public async Task<int> CrearCliente(Cliente cliente)
         {
-            if(cliente == null) throw new ArgumentNullException(nameof(cliente));
+            if(cliente is null) ArgumentNullException.ThrowIfNull(cliente);
 
             DateTime hoy = DateTime.Now;
 
@@ -61,15 +66,21 @@ namespace L02_P02_2020AC602_2021EM652.Servicios
         }
 
 
-        public async Task<int>AgregarLibroAlDetalle(int libro,int pedido)
+        public async Task<int>AgregarLibroAlDetalle(int libroId,int pedidoId)
         {
+            var libro = await _context.Libros.FindAsync(libroId);
+            var pedido = await _context.PedidoEncabezados.FindAsync(pedidoId);
+
             PedidoDetalle libroAgregado = new()
             {
-                IdLibro = libro,
-                IdPedido = pedido,
+                IdLibro = libroId,
+                IdPedido = pedidoId,
+                IdLibroNavigation = libro,
+                IdPedidoNavigation = pedido,
             };
 
             await _context.PedidoDetalles.AddAsync(libroAgregado);
+
             await _context.SaveChangesAsync();
 
             int idDetalle = libroAgregado.Id;
@@ -86,5 +97,48 @@ namespace L02_P02_2020AC602_2021EM652.Servicios
             return idPedido;
         }
 
+        public async Task<Cliente> ObtenerCliente(int idCliente)
+        {
+            Cliente? cliente = await _context.Clientes.Where(x => x.Id == idCliente).SingleOrDefaultAsync();
+            return cliente;
+        }
+
+        public async Task<int> UltimoCliente()
+        {
+            var cliente = await _context.Clientes.OrderByDescending(x => x).FirstOrDefaultAsync();
+
+            int idCliente = cliente.Id;
+
+            return idCliente;
+        }
+
+        public async Task<IEnumerable<PedidoDetalle>> ObtenerDetalleDeVenta(int idCliente)
+        {
+            var cliente = await ObtenerCliente(idCliente);
+            var pedido = await _context.PedidoEncabezados.Where(x => x.IdCliente == cliente.Id).FirstOrDefaultAsync();
+
+            var librosDePedido = await _context.PedidoDetalles
+                                .Where(c => c.IdPedido == pedido.Id)
+                                .Include(x => x.IdLibroNavigation)
+                                .Include(y => y.IdLibroNavigation.IdAutorNavigation)
+                                .ToListAsync();
+            return librosDePedido;
+        }
+
+        public async Task<PedidoEncabezado> ActualizarPedido( int cliente, int libros, decimal total)
+        {
+            
+            var pedido = await _context.PedidoEncabezados.Where(x => x.IdCliente == cliente).FirstOrDefaultAsync();
+
+            pedido.Estado = "C";
+            pedido.CantidadLibros = libros;
+            pedido.Total = total;
+
+            _context.PedidoEncabezados.Update(pedido);
+            await _context.SaveChangesAsync();
+
+            return pedido;
+
+        }
     }
 }

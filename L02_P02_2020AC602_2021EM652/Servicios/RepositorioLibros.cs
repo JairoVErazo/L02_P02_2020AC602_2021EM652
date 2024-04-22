@@ -9,9 +9,9 @@ namespace L02_P02_2020AC602_2021EM652.Servicios
     }
     public class RepositorioLibros : IRepositorioLibros
     {
-        private readonly LibreriaDbContext _context;
+        private readonly LibreriaContext _context;
 
-        public RepositorioLibros(LibreriaDbContext context)
+        public RepositorioLibros(LibreriaContext context)
         {
             _context = context;
         }

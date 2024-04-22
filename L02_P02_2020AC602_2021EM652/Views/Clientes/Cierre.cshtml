@@ -1,32 +1,95 @@
-﻿@{
-
-}
-
-<container>
-    <form>
+﻿@model CierreViewModel;
+<container style="display: flex;">
+    <div style="flex: 1; margin-right: 20px;">
         <div class="mb-3">
             <h2>Proceso de Venta</h2>
             <h4>Datos del Cliente</h4>
             <div class="row">
                 <div class="col">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <label asp-for="Cliente.Nombre" class="form-label">Nombre</label>
+                    <input disabled placeholder="@Model.Cliente?.Nombre" type="text" class="form-control" id="nombre">
                 </div>
                 <div class="col">
-                    <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido">
+                    <label asp-for="Cliente.Apellido" class="form-label">Apellido</label>
+                    <input disabled placeholder="@Model.Cliente?.Apellido" type="text" class="form-control" id="apellido">
                 </div>
             </div>
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label asp-for="Cliente.Email" class="form-label">Email</label>
+            <input disabled placeholder="@Model.Cliente?.Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-            <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="direccion">
+            <label asp-for="Cliente.Direccion" class="form-label">Dirección</label>
+            <input disabled placeholder="@Model.Cliente?.Direccion" type="text" class="form-control" id="direccion">
         </div>
-    </form>
+    </div>
 
+    <div style="flex: 1; font-size: 20px;">
 
-</container>
+        <div style="flex: 1; margin-right: 20px;">
+            <h3 style="color:blue">Libros  @Model.PedidoDetalles.Count()</h3>
+            <h3 style="color:blue">Carrito @Model.PrecioTotal USD</h3>
+            <ul class="list-group">
+                @foreach(var libro in Model.PedidoDetalles)
+                {
+                    <li class="list-group-item">
+                        <span class="item-name"><div><p>@libro.IdLibroNavigation.Nombre</p><p style="font-size:15px">@libro.IdLibroNavigation.IdAutorNavigation.Autor</p></div></span>
+                        <span class="price float-right">@libro.IdLibroNavigation.Precio</span>
+
+                    </li>
+                }
+            </ul>
+            <form method="post" asp-action="Cierre">
+                <input type="hidden" name="idCliente" value="@Model.Cliente.Id" />
+                <input type="hidden" name="libros" value="@Model.PedidoDetalles.Count()" />
+                <input type="hidden" name="total" value="@Model.PrecioTotal" />
+                <button id="cerrarVentanaBtn" type="submit" class="btn btn-primary float-right" style="background-color:green; border: 1px solid white;">Cerrar Ventana</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Mensaje</h5>
+                    <button id="cerrarModal" type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí mostramos el mensaje de éxito o error -->
+                    @if (ViewBag.Exito)
+                    {
+                        <p>El pedido se actualizó correctamente.</p>
+                    }
+                    else
+                    {
+                        <p>Ocurrió un error al actualizar el pedido. Por favor, inténtelo de nuevo más tarde.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón "Cerrar ventana" -->
+    
+
+    <script>
+        // Si el ViewBag.Exito está presente y es true, mostramos el modal de éxito
+        @if (ViewBag.Exito != null && ViewBag.Exito is true)
+        {
+            <text>
+                $(document).ready(function() {
+                    $('#feedbackModal').modal('show');
+                });
+            </text>
+        }
+
+        // Agregamos un listener al botón "Cerrar ventana" para que cierre el modal al presionarlo
+        document.getElementById('cerrarModal').addEventListener('click', function() {
+            $('#feedbackModal').modal('hide');
+        });
+    </script>

@@ -12,7 +12,7 @@ namespace L02_P02_2020AC602_2021EM652
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<LibreriaDbContext>(options => 
+            builder.Services.AddDbContext<LibreriaContext>(options => 
             options.UseSqlServer("name=DefaultConnection"));
             builder.Services.AddTransient<IRepositorioClientes, RepositorioClientes>();
             builder.Services.AddTransient<IRepositorioLibros, RepositorioLibros>();
